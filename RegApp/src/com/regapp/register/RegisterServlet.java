@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.regapp.registermodel.RegisterModel;
+
 /**
  * Servlet implementation class RegisterServlet
  */
@@ -38,7 +40,16 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("In-register servlet's doPost method");
+		System.out.println("In-register servlet's doPost method");  
+		String registerResponse = null;
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("pwd");
+		String repwd = request.getParameter("repwd");
+		PrintWriter pw = response.getWriter();
+		
+		registerResponse = RegisterModel.register(email, pwd, repwd);
+		pw.write("<html><body>Hello "+email+", "+ registerResponse +"</body></html>");
+		
 	}
 
 }
